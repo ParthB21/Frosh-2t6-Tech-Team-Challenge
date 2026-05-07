@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "day": "Day 1 — Monday, September 1",
+    "title": "Opening Ceremony",
+    "time": "10:00 AM – 12:00 PM",
+    "location": "Convocation Hall",
+    "description": "Kick off Frosh Week in style! Welcome speeches, a surprise performance, and your very first taste of what it means to be part of this university family.",
+    "emoji": "🎉",
+    "category": "ceremony"
+  },
+  {
+    "id": 2,
+    "day": "Day 1 — Monday, September 1",
+    "title": "Welcome BBQ on the Front Campus",
+    "time": "12:30 PM – 2:30 PM",
+    "location": "Front Campus Lawn",
+    "description": "Fuel up with burgers, hot dogs, and veggie options while meeting your frosh leaders and future classmates. Bring your appetite and your best icebreaker.",
+    "emoji": "🍔",
+    "category": "food"
+  },
+  {
+    "id": 3,
+    "day": "Day 1 — Monday, September 1",
+    "title": "Campus-Wide Scavenger Hunt",
+    "time": "3:00 PM – 5:30 PM",
+    "location": "Starting at King's College Circle",
+    "description": "Race across campus in teams, solve clues, and discover hidden gems you'll be using for the next four years. First place wins bragging rights and a prize pack.",
+    "emoji": "🗺️",
+    "category": "activity"
+  },
+  {
+    "id": 4,
+    "day": "Day 2 — Tuesday, September 2",
+    "title": "Faculty Mixer & Program Info Session",
+    "time": "10:00 AM – 11:30 AM",
+    "location": "Bahen Centre, Room 1160",
+    "description": "Meet professors, upper-year students, and your future study squad. Learn about your program, clubs, and resources — and figure out where the best coffee is on campus.",
+    "emoji": "🎓",
+    "category": "ceremony"
+  },
+  {
+    "id": 5,
+    "day": "Day 2 — Tuesday, September 2",
+    "title": "Tie-Dye & Chill",
+    "time": "1:00 PM – 3:00 PM",
+    "location": "UC Quad",
+    "description": "Express yourself by tie-dyeing your own Frosh t-shirt. All supplies provided — just show up and get colourful with your crew.",
+    "emoji": "👕",
+    "category": "activity"
+  },
+  {
+    "id": 6,
+    "day": "Day 2 — Tuesday, September 2",
+    "title": "Clubs & Societies Fair",
+    "time": "3:30 PM – 5:30 PM",
+    "location": "Myhal Centre Atrium",
+    "description": "Over 50 student clubs in one place — from hackathon teams to dance crews to debate societies. Come curious, leave with ten new sign-up sheets.",
+    "emoji": "🪧",
+    "category": "social"
+  },
+  {
+    "id": 7,
+    "day": "Day 2 — Tuesday, September 2",
+    "title": "Frosh Trivia Night",
+    "time": "8:00 PM – 10:00 PM",
+    "location": "Hart House Great Hall",
+    "description": "Think you know your pop culture, history, and campus trivia? Assemble a team of six and compete for the coveted Frosh Trivia Trophy (a very large foam trophy).",
+    "emoji": "🧠",
+    "category": "social"
+  },
+  {
+    "id": 8,
+    "day": "Day 3 — Wednesday, September 3",
+    "title": "Morning Yoga & Wellness Walk",
+    "time": "8:00 AM – 9:30 AM",
+    "location": "Queen's Park",
+    "description": "Start your last Frosh day grounded with a guided outdoor yoga session followed by a mindful walk through Queen's Park. Mats provided — just bring yourself.",
+    "emoji": "🧘",
+    "category": "activity"
+  },
+  {
+    "id": 9,
+    "day": "Day 3 — Wednesday, September 3",
+    "title": "Pancake Breakfast & Tradition Ceremony",
+    "time": "10:00 AM – 11:30 AM",
+    "location": "Engineering Quad",
+    "description": "A Frosh Week tradition — stack your plate high and watch upper years pass down the purple torch in a ceremony that's equal parts heartfelt and chaotic.",
+    "emoji": "🥞",
+    "category": "food"
+  },
+  {
+    "id": 10,
+    "day": "Day 3 — Wednesday, September 3",
+    "title": "Closing Carnival & Fireworks",
+    "time": "7:00 PM – 10:30 PM",
+    "location": "Athletic Centre Field",
+    "description": "Send off Frosh Week with carnival games, live music, food trucks, and a fireworks finale. This is the one — don't miss it.",
+    "emoji": "🎆",
+    "category": "ceremony"
+  }
+]
