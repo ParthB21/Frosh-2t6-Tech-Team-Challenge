@@ -29,8 +29,17 @@ function App() {
 
   return (
     <div>
-      <h1>Frosh Week Schedule</h1>
-      <p>Find out what's in store for you!</p>
+      <div className="header">
+        <h1>Welcome to Frosh Week!</h1>
+
+        <p>
+          Your week of chaos, friends,
+          and engineering traditions begins here.
+        </p>
+
+        <p>Find out what's in store for you!</p>
+      </div>
+
 
             {Object.entries(scheduleData).map(([day, events]) => (
         <div key={day}>
@@ -40,6 +49,8 @@ function App() {
             {events.map((event, index) => {
             const eventID = `${day}-${index}`;
             const isExpanded = expandedEvent === eventID;
+            
+            const hasDetails = event["Event Description"] || event["Event Location"];
 
             return (
               <button
@@ -48,6 +59,9 @@ function App() {
                 onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
                 style={{ backgroundColor: colorMap[event["Color"]]}}
               >
+
+                {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
+
                 <strong>{event["Event Name"]}</strong>
 
                 <br />
@@ -56,7 +70,7 @@ function App() {
                 
                 {/* Show additional details if the event is expanded */}
                 {isExpanded && (
-                  <div>
+                  <div className="event-details">
                     {event["Event Description"] && <p>{event["Event Description"]}</p>}
 
                     {event["Event Location"] && (<p>Location: {event["Event Location"]}</p>)}

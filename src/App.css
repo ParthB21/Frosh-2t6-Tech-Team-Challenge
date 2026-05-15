@@ -6,6 +6,11 @@ body {
   background-color: #c68ae6;
 }
 
+.header {
+  text-align: center;
+  padding: 1% 5%;
+}
+
 .event-button {
   display: block;
   width: 100%;
@@ -25,6 +30,8 @@ body {
 
   box-shadow:
     0 4px 10px rgba(0,0,0,0.15);
+  
+  position: relative;
 }
 
 .event-button:hover {
@@ -32,4 +39,16 @@ body {
 
   box-shadow:
     0 10px 20px rgba(0,0,0,0.25);
+}
+
+.expand-icon {
+  position: absolute;
+  top: 15px;
+  right: 1.5%;
+
+  font-size: 10px;
+  font-weight: lighter;
+  transform: scaleX(2);
+
+  color: rgb(73, 71, 71);
 }
