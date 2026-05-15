@@ -1,6 +1,6 @@
 /* TODO: Add your styles here */
 
 body {
-  margin: 0;
+  margin: 3%; /*3% of the viewport width */
   font-family: sans-serif;
 }

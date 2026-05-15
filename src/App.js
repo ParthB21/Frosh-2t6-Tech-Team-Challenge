@@ -7,7 +7,28 @@ function App() {
   return (
     <div>
       <h1>Good Luck, Applicant!</h1>
-      {/*feel free to remove this*/}
+
+      <p>Frosh Week Schedule</p>
+      <p>Find out what's in store for you!</p>
+
+            {Object.entries(scheduleData).map(([day, events]) => (
+        <div key={day}>
+          <h2>{day}</h2>
+
+          <ul>
+            {events.map((event, index) => (
+              <li key={index}>
+                <strong>{event["Event Name"]}</strong>
+
+                <br />
+
+                {event["Start Time"]} - {event["End Time"]}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
     </div>
   );
 }
