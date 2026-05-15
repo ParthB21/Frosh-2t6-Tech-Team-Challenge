@@ -4,3 +4,8 @@ body {
   margin: 3%; /*3% of the viewport width */
   font-family: sans-serif;
 }
+
+.event-button {
+  display: block;
+  margin-bottom: 10px;
+}

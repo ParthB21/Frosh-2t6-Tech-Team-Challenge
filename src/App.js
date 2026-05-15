@@ -3,6 +3,18 @@ import scheduleData from './schedule_data.json';
 
 // TODO: Build your Frosh Week Schedule page here
 
+function formatTime(timeString) {
+  if (timeString.slice(-2) === 'AM' || timeString.slice(-2) === 'PM' || timeString === " "){
+    return timeString; // Already in 12-hour format or empty, return as is
+  }
+
+  timeString = timeString.slice(0, 5); // Remove seconds
+  const [hour, minute] = timeString.split(':').map(Number);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+  return `${formattedHour}:${minute.toString().padStart(2, '0')} ${period}`;
+}
+
 function App() {
   return (
     <div>
@@ -15,17 +27,16 @@ function App() {
         <div key={day}>
           <h2>{day}</h2>
 
-          <ul>
+          <div>
             {events.map((event, index) => (
-              <li key={index}>
+              <button key={index} className="event-button" onckick>
                 <strong>{event["Event Name"]}</strong>
 
                 <br />
-
-                {event["Start Time"]} - {event["End Time"]}
-              </li>
+                {formatTime(event["Start Time"])} - {formatTime(event["End Time"])}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       ))}
 
