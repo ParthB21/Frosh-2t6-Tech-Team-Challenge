@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 // Import the schedule data from the JSON file — you can use it like a regular JS array
 import scheduleData from './schedule_data.json';
 
@@ -33,8 +34,23 @@ function App() {
 
   return (
     <div>
+
+      <nav className="navbar">
+        <div className="nav-logo">
+          <img src="../assets-used/main-logo-2T5.png" alt="Frosh Logo" className="frosh-logo"/>
+        </div>
+
+        <div className="nav-links">
+          <a href="#home">Home</a>
+          <a href="#schedule" style={{ fontWeight: 'bold' }}>Schedule</a>
+          <a href="#events">Events</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+      </nav>
+
       <div className="header">
-        <h1>Welcome to F!ROSH Week!</h1>
+        <h1 className="header-name"> Welcome to F!ROSH Week!</h1>
 
         <p>
           Your week of chaos, friends,
@@ -64,7 +80,7 @@ function App() {
           const eventID = `${selectedDay}-${index}`;
           const isExpanded = expandedEvent === eventID;
           
-          const hasDetails = event["Event Description"] || event["Event Location"];
+          const hasDetails = event["Event Description"];
 
           return (
             <button
@@ -81,13 +97,17 @@ function App() {
               <br />
 
               {formatTime(event["Start Time"])} - {" " + formatTime(event["End Time"])}
+
+              {event["Event Location"] && 
+              (<p className="location-row">
+                <img src="../assets-used/location-icon.png" alt="Location: " className="location-icon"/>
+                {event["Event Location"]}
+                </p>)}
               
               {/* Show additional details if the event is expanded */}
               {isExpanded && (
                 <div className="event-details">
                   {event["Event Description"] && <p>{event["Event Description"]}</p>}
-
-                  {event["Event Location"] && (<p>Location: {event["Event Location"]}</p>)}
                 </div>
               )}
             </button>
