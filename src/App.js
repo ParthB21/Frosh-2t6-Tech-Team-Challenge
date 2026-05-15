@@ -27,6 +27,10 @@ function App() {
     gray: "#a6a6a6"
   };
 
+  const days = Object.keys(scheduleData);
+
+  const [selectedDay, setSelectedDay] = useState(days[0]); // Default to the first day
+
   return (
     <div>
       <div className="header">
@@ -40,50 +44,58 @@ function App() {
         <p>Find out what's in store for you!</p>
       </div>
 
+      <div className="day-tabs">
+          {days.map((day) => (
+            <button 
+              className={`day-tab ${day === selectedDay ? "active" : ""}`}
+              key={day}
+              onClick={() => {setSelectedDay(day);}}
+            >
+              {day}
+            </button>
+          ))}
+      </div>
 
-            {Object.entries(scheduleData).map(([day, events]) => (
-        <div key={day}>
-          <h2>{day}</h2>
+      <div>
+        <h2>{selectedDay}</h2>     
 
-          <div>
-            {events.map((event, index) => {
-            const eventID = `${day}-${index}`;
-            const isExpanded = expandedEvent === eventID;
-            
-            const hasDetails = event["Event Description"] || event["Event Location"];
+        <div>{scheduleData[selectedDay].map((event, index) => {   
+        
+          const eventID = `${selectedDay}-${index}`;
+          const isExpanded = expandedEvent === eventID;
+          
+          const hasDetails = event["Event Description"] || event["Event Location"];
 
-            return (
-              <button
-                className="event-button"
-                key={index}
-                onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
-                style={{ backgroundColor: colorMap[event["Color"]]}}
-              >
+          return (
+            <button
+              className="event-button"
+              key={index}
+              onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
+              style={{ backgroundColor: colorMap[event["Color"]]}}
+            >
 
-                {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
+              {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
 
-                <strong>{event["Event Name"]}</strong>
+              <strong>{event["Event Name"]}</strong>
 
-                <br />
+              <br />
 
-                {formatTime(event["Start Time"])} - {" " + formatTime(event["End Time"])}
-                
-                {/* Show additional details if the event is expanded */}
-                {isExpanded && (
-                  <div className="event-details">
-                    {event["Event Description"] && <p>{event["Event Description"]}</p>}
+              {formatTime(event["Start Time"])} - {" " + formatTime(event["End Time"])}
+              
+              {/* Show additional details if the event is expanded */}
+              {isExpanded && (
+                <div className="event-details">
+                  {event["Event Description"] && <p>{event["Event Description"]}</p>}
 
-                    {event["Event Location"] && (<p>Location: {event["Event Location"]}</p>)}
-                  </div>
-                )}
-              </button>
-            );
+                  {event["Event Location"] && (<p>Location: {event["Event Location"]}</p>)}
+                </div>
+              )}
+            </button>
+          );
 
           })}
-          </div>
         </div>
-      ))}
-
+      </div>
     </div>
   );
 }
