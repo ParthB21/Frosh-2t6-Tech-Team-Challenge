@@ -3,9 +3,33 @@
 body {
   margin: 3%; /*3% of the viewport width */
   font-family: sans-serif;
+  background-color: #c68ae6;
 }
 
 .event-button {
   display: block;
-  margin-bottom: 10px;
+  width: 100%;
+
+  margin-bottom: 1%;
+  padding: 16px;
+
+  border: none;
+  border-radius: 16px;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.15);
+}
+
+.event-button:hover {
+  transform: translateY(-1px) scale(1.01);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.25);
 }

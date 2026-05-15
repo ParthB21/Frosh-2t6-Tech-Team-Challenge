@@ -19,11 +19,17 @@ function formatTime(timeString) {
 function App() {
   const [expandedEvent, setExpandedEvent] = useState(null);
 
+  const colorMap = {
+    purple: "#9848c3",
+    "dark-purple": "#732e8e",
+    yellow: "#dbbb51",
+    green: "#51840f",
+    gray: "#a6a6a6"
+  };
+
   return (
     <div>
-      <h1>Good Luck, Applicant!</h1>
-
-      <p>Frosh Week Schedule</p>
+      <h1>Frosh Week Schedule</h1>
       <p>Find out what's in store for you!</p>
 
             {Object.entries(scheduleData).map(([day, events]) => (
@@ -40,7 +46,7 @@ function App() {
                 className="event-button"
                 key={index}
                 onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
-                style={{ backgroundColor: event["Color"] }}
+                style={{ backgroundColor: colorMap[event["Color"]]}}
               >
                 <strong>{event["Event Name"]}</strong>
 
