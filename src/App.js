@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // Import the schedule data from the JSON file — you can use it like a regular JS array
 import scheduleData from './schedule_data.json';
 
@@ -16,6 +17,8 @@ function formatTime(timeString) {
 }
 
 function App() {
+  const [expandedEvent, setExpandedEvent] = useState(null);
+
   return (
     <div>
       <h1>Good Luck, Applicant!</h1>
@@ -28,14 +31,35 @@ function App() {
           <h2>{day}</h2>
 
           <div>
-            {events.map((event, index) => (
-              <button key={index} className="event-button" onckick>
+            {events.map((event, index) => {
+            const eventID = `${day}-${index}`;
+            const isExpanded = expandedEvent === eventID;
+
+            return (
+              <button
+                className="event-button"
+                key={index}
+                onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
+                style={{ backgroundColor: event["Color"] }}
+              >
                 <strong>{event["Event Name"]}</strong>
 
                 <br />
-                {formatTime(event["Start Time"])} - {formatTime(event["End Time"])}
+
+                {formatTime(event["Start Time"])} - {" " + formatTime(event["End Time"])}
+                
+                {/* Show additional details if the event is expanded */}
+                {isExpanded && (
+                  <div>
+                    {event["Event Description"] && <p>{event["Event Description"]}</p>}
+
+                    {event["Event Location"] && (<p>Location: {event["Event Location"]}</p>)}
+                  </div>
+                )}
               </button>
-            ))}
+            );
+
+          })}
           </div>
         </div>
       ))}
