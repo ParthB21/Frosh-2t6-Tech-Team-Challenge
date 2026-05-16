@@ -34,6 +34,67 @@ function extractLink(htmlString) {
   };
 }
 
+function EventCard({event, index, eventID, isExpanded, setExpandedEvent, colorMap}) {
+  const link = extractLink(event["Event Description"]);
+
+  const hasDetails = event["Event Description"];
+  const name = event["Event Name"];
+  const description = event["Event Description"];
+  const location = event["Event Location"];
+  const startTime = event["Start Time"];
+  const endTime = event["End Time"];
+  const color = event["Color"];
+
+  return (
+    <button
+      className="event-button"
+      key={index}
+      onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
+      style={{ backgroundColor: colorMap[color]}}
+    >
+
+    {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
+
+  
+
+  <br />
+
+  {startTime ? `${formatTime(startTime)} - ${formatTime(endTime)}` : ""}
+  <div className="event-name">{name}</div>
+  {location && 
+  (<p className="location-row">
+    <img src="../assets-used/location-icon.png" alt="Location: " className="location-icon"/>
+    {location}
+    </p>)}
+
+    {/* Show additional details if the event is expanded */}
+    {isExpanded && (
+      <div className="event-details">
+        {description && (
+          hasLink(description) ? (
+            <p>
+              {description.split("<a")[0]}
+
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+                className="event-link"
+              >
+                {link.text}
+              </a>
+              {description.split("</a>")[1]}
+            </p>
+          ) : (
+            <p>{description}</p>
+          )
+        )}
+      </div>
+    )}
+    </button>
+  );
+}
+
 function App() {
   const [expandedEvent, setExpandedEvent] = useState(null);
 
@@ -97,57 +158,17 @@ function App() {
         
           const eventID = `${selectedDay}-${index}`;
           const isExpanded = expandedEvent === eventID;
-          
-          const hasDetails = event["Event Description"];
-          const link = extractLink(event["Event Description"]);
 
           return (
-            <button
-              className="event-button"
+            <EventCard
               key={index}
-              onClick={() => setExpandedEvent(isExpanded ? null : eventID)}
-              style={{ backgroundColor: colorMap[event["Color"]]}}
-            >
-
-              {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
-
-              <strong className="event-name">{event["Event Name"]}</strong>
-
-              <br />
-
-              {event["Start Time"] ? `${formatTime(event["Start Time"])} - ${formatTime(event["End Time"])}` : ""}
-
-              {event["Event Location"] && 
-              (<p className="location-row">
-                <img src="../assets-used/location-icon.png" alt="Location: " className="location-icon"/>
-                {event["Event Location"]}
-                </p>)}
-              
-              {/* Show additional details if the event is expanded */}
-              {isExpanded && (
-                <div className="event-details">
-                  {event["Event Description"] && (
-                    hasLink(event["Event Description"]) ? (
-                      <p>
-                        {event["Event Description"].split("<a")[0]}
-
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="event-link"
-                        >
-                          {link.text}
-                        </a>
-                        {event["Event Description"].split("</a>")[1]}
-                      </p>
-                    ) : (
-                      <p>{event["Event Description"]}</p>
-                    )
-                  )}
-                </div>
-              )}
-            </button>
+              event={event}
+              index={index}
+              eventID={eventID}
+              isExpanded={isExpanded}
+              setExpandedEvent={setExpandedEvent}
+              colorMap={colorMap}
+            />
           );
 
           })}

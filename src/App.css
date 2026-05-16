@@ -141,8 +141,8 @@ body {
 
 .event-name {
   font-size: 18px;
-  color: #4b0082;
   text-align: center;
+  font-weight: bold;
 }
 
 .event-button:hover {
