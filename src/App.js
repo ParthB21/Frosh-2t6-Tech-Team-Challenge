@@ -17,6 +17,23 @@ function formatTime(timeString) {
   return `${formattedHour}:${minute.toString().padStart(2, '0')} ${period}`;
 }
 
+function hasLink(text) {
+  return text && text.includes("<a href=");
+}
+
+function extractLink(htmlString) {
+  if (!htmlString) return null;
+
+  const match = htmlString.match(/<a\s+href=["']([^"']+)["'][^>]*>(.*?)<\/a>/);
+
+  if (!match) return null;
+
+  return {
+    url: match[1],
+    text: match[2]
+  };
+}
+
 function App() {
   const [expandedEvent, setExpandedEvent] = useState(null);
 
@@ -25,7 +42,7 @@ function App() {
     "dark-purple": "#732e8e",
     yellow: "#dbbb51",
     green: "#51840f",
-    gray: "#a6a6a6"
+    gray: "#868080"
   };
 
   const days = Object.keys(scheduleData);
@@ -49,6 +66,7 @@ function App() {
 
       </nav>
 
+      <div className="main-content">
       <div className="header">
         <h1 className="header-name"> Welcome to F!ROSH Week!</h1>
 
@@ -81,6 +99,7 @@ function App() {
           const isExpanded = expandedEvent === eventID;
           
           const hasDetails = event["Event Description"];
+          const link = extractLink(event["Event Description"]);
 
           return (
             <button
@@ -92,11 +111,11 @@ function App() {
 
               {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
 
-              <strong>{event["Event Name"]}</strong>
+              <strong className="event-name">{event["Event Name"]}</strong>
 
               <br />
 
-              {formatTime(event["Start Time"])} - {" " + formatTime(event["End Time"])}
+              {event["Start Time"] ? `${formatTime(event["Start Time"])} - ${formatTime(event["End Time"])}` : ""}
 
               {event["Event Location"] && 
               (<p className="location-row">
@@ -107,7 +126,25 @@ function App() {
               {/* Show additional details if the event is expanded */}
               {isExpanded && (
                 <div className="event-details">
-                  {event["Event Description"] && <p>{event["Event Description"]}</p>}
+                  {event["Event Description"] && (
+                    hasLink(event["Event Description"]) ? (
+                      <p>
+                        {event["Event Description"].split("<a")[0]}
+
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="event-link"
+                        >
+                          {link.text}
+                        </a>
+                        {event["Event Description"].split("</a>")[1]}
+                      </p>
+                    ) : (
+                      <p>{event["Event Description"]}</p>
+                    )
+                  )}
                 </div>
               )}
             </button>
@@ -115,6 +152,7 @@ function App() {
 
           })}
         </div>
+      </div>
       </div>
     </div>
   );

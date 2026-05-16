@@ -1,9 +1,13 @@
 /* TODO: Add your styles here */
 
 body {
-  margin: 3%; /*3% of the viewport width */
-  font-family: sans-serif;
+  margin: 0;
   background-color: #c68ae6;
+  font-family: sans-serif;
+}
+
+.main-content {
+  margin: 3%; /*3% of the viewport width */
 }
 
 .navbar {
@@ -13,11 +17,14 @@ body {
   align-items: center;
 
   padding: 16px 40px;
+  margin: 0 1%;
+
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
 
   background: white;
 
-  box-shadow:
-    0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 
   position: sticky;
   top: 0;
@@ -58,15 +65,15 @@ body {
 
 .header {
   text-align: center;
-  padding: 1% 5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 5%;
 }
 
 .header-name {
   font-size: 36px;
   font-weight: bold;
   color: #4b0082;
-
-
 }
 
 .day-tabs {
@@ -132,6 +139,12 @@ body {
   position: relative;
 }
 
+.event-name {
+  font-size: 18px;
+  color: #4b0082;
+  text-align: center;
+}
+
 .event-button:hover {
   transform: translateY(-1px) scale(1.01);
 
@@ -164,4 +177,8 @@ body {
   width: 14px;
   height: 14px;
   filter: brightness(0.4);
+}
+
+.event-link {
+  color: #4b0082;
 }
