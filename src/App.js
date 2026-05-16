@@ -45,6 +45,8 @@ function EventCard({event, index, eventID, isExpanded, setExpandedEvent, colorMa
   const endTime = event["End Time"];
   const color = event["Color"];
 
+  const timeRange = startTime && endTime ? `${formatTime(startTime)} - ${formatTime(endTime)}` : "                ";
+
   return (
     <button
       className="event-button"
@@ -55,17 +57,17 @@ function EventCard({event, index, eventID, isExpanded, setExpandedEvent, colorMa
 
     {hasDetails && (<span className ="expand-icon">{isExpanded ? "˄" : "˅"}</span>)}
 
-  
-
-  <br />
-
-  {startTime ? `${formatTime(startTime)} - ${formatTime(endTime)}` : ""}
-  <div className="event-name">{name}</div>
-  {location && 
-  (<p className="location-row">
-    <img src="../assets-used/location-icon.png" alt="Location: " className="location-icon"/>
-    {location}
-    </p>)}
+    <div className = "event-header">
+      <span className="event-time">
+        {timeRange}
+        {location && 
+        (<p className="location-row">
+          <img src="../assets-used/location-icon.png" alt="Location: " className="location-icon"/>
+          {location}
+          </p>)}
+      </span>
+      <strong className="event-name">{name}</strong>
+    </div>
 
     {/* Show additional details if the event is expanded */}
     {isExpanded && (
