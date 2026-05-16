@@ -132,53 +132,73 @@ function App() {
       </nav>
 
       <div className="main-content">
-      <div className="header">
-        <h1 className="header-name"> Welcome to F!ROSH Week!</h1>
+        <div className="header">
+          <h1 className="header-name"> 
+            Welcome to F!ROSH Week!
+          </h1>
+          <p>
+            Your week of chaos, friends,
+            and engineering traditions begins here.
+          </p>
 
-        <p>
-          Your week of chaos, friends,
-          and engineering traditions begins here.
-        </p>
+          <p>Find out what's in store for you!</p>
+        </div>
 
-        <p>Find out what's in store for you!</p>
-      </div>
+        <div className="day-tabs">
+            {days.map((day) => (
+              <button 
+                className={`day-tab ${day === selectedDay ? "active" : ""}`}
+                key={day}
+                onClick={() => {setSelectedDay(day);}}
+              >
+                {day}
+              </button>
+            ))}
+        </div>
 
-      <div className="day-tabs">
-          {days.map((day) => (
-            <button 
-              className={`day-tab ${day === selectedDay ? "active" : ""}`}
-              key={day}
-              onClick={() => {setSelectedDay(day);}}
-            >
-              {day}
-            </button>
-          ))}
-      </div>
+        <div>
+          <h2 className="selected-day">{selectedDay}</h2>     
 
-      <div>
-        <h2 className="selected-day">{selectedDay}</h2>     
+          <div>{scheduleData[selectedDay].map((event, index) => {   
+          
+            const eventID = `${selectedDay}-${index}`;
+            const isExpanded = expandedEvent === eventID;
 
-        <div>{scheduleData[selectedDay].map((event, index) => {   
-        
-          const eventID = `${selectedDay}-${index}`;
-          const isExpanded = expandedEvent === eventID;
+            return (
+              <EventCard
+                key={index}
+                event={event}
+                index={index}
+                eventID={eventID}
+                isExpanded={isExpanded}
+                setExpandedEvent={setExpandedEvent}
+                colorMap={colorMap}
+              />
+            );
 
-          return (
-            <EventCard
-              key={index}
-              event={event}
-              index={index}
-              eventID={eventID}
-              isExpanded={isExpanded}
-              setExpandedEvent={setExpandedEvent}
-              colorMap={colorMap}
-            />
-          );
-
-          })}
+            })}
+          </div>
         </div>
       </div>
-      </div>
+      
+      <footer className="footer">
+        <div className="footer-logo">
+          <img
+            src="../assets-used/main-logo-2T5.png"
+            alt="Frosh Logo"
+            className="footer-logo-img"
+          />
+        </div>
+
+        <div className="uoft-logo">
+          <img
+            src="../assets-used/uoftlogo.png"
+            alt="University of Toronto Logo"
+            className="uoft-logo-img"
+          />
+        </div>
+      </footer>
+
     </div>
   );
 }
