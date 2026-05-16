@@ -45,8 +45,10 @@ function EventCard({event, index, eventID, isExpanded, setExpandedEvent, colorMa
   const endTime = event["End Time"];
   const color = event["Color"];
 
-  const timeRange = startTime && endTime ? `${formatTime(startTime)} - ${formatTime(endTime)}` : "                ";
-
+  const timeRange =
+    startTime?.trim() && endTime?.trim()
+      ? `${formatTime(startTime)} - ${formatTime(endTime)}`
+      : "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"; // Non-breaking spaces for alignment
   return (
     <button
       className="event-button"
@@ -122,7 +124,7 @@ function App() {
 
         <div className="nav-links">
           <a href="#home">Home</a>
-          <a href="#schedule" style={{ fontWeight: 'bold' }}>Schedule</a>
+          <a href="#schedule" style={{ color: 'var(--purple-color)' }}>Schedule</a>
           <a href="#events">Events</a>
           <a href="#contact">Contact</a>
         </div>
@@ -154,7 +156,7 @@ function App() {
       </div>
 
       <div>
-        <h2>{selectedDay}</h2>     
+        <h2 className="selected-day">{selectedDay}</h2>     
 
         <div>{scheduleData[selectedDay].map((event, index) => {   
         
