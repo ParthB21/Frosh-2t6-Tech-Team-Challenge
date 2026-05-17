@@ -1,9 +1,87 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Import the schedule data from the JSON file — you can use it like a regular JS array
 import scheduleData from './schedule_data.json';
 
 // TODO: Build your Frosh Week Schedule page here
+
+function MobileNavBar({ menuOpen, setMenuOpen }) {
+
+  function handleComingSoon(e) {
+    e.preventDefault();
+    setMenuOpen(false);
+    alert("Coming soon!");
+  }
+
+  return (
+      <nav className="navbar-mobile">
+      <div className="nav-logo">
+        <img src="../assets-used/main-logo-2T5.png" className="frosh-logo" alt="Frosh Logo" />
+      </div>
+
+      <button
+        className="hamburger"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        ☰
+      </button>
+
+      <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+        <a href="#home" onClick={(e) => handleComingSoon(e)}>Home</a>
+        <a href="#events" onClick={(e) => handleComingSoon(e)}>Events</a>
+        <a href="#schedule" style={{ color: 'var(--purple-color)' }} onClick={() => setMenuOpen(false)}>Schedule</a>
+        <a href="#contact" onClick={(e) => handleComingSoon(e)}>Contact</a>
+      </div>
+    </nav>
+  )
+}
+
+function DesktopNavBar() {
+
+  function handleComingSoon(e) {
+    e.preventDefault();
+    alert("Coming soon!");
+  }
+
+  return (
+    <nav className="navbar">
+      <div className="nav-logo">
+        <img src="../assets-used/main-logo-2T5.png" alt="Frosh Logo" className="frosh-logo"/>
+      </div>
+
+      <div className="nav-links">
+        <a href="#home" onClick={(e) => handleComingSoon(e)}>Home</a>
+        <a href="#events" onClick={(e) => handleComingSoon(e)}>Events</a>
+        <a href="#schedule" style={{ color: 'var(--purple-color)' }}>Schedule</a>
+        <a href="#contact" onClick={(e) => handleComingSoon(e)}>Contact</a>
+      </div>
+
+    </nav>
+  );
+}
+
+function NavBar() {
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 700);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return isMobile ? 
+      ( <MobileNavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />) 
+      : (<DesktopNavBar />
+  );
+}
 
 function formatTime(timeString) {
   if (timeString.slice(-2) === 'AM' || timeString.slice(-2) === 'PM' || timeString === " "){
@@ -115,21 +193,9 @@ function App() {
   const [selectedDay, setSelectedDay] = useState(days[0]); // Default to the first day
 
   return (
-    <div>
+    <div className="app-container">
 
-      <nav className="navbar">
-        <div className="nav-logo">
-          <img src="../assets-used/main-logo-2T5.png" alt="Frosh Logo" className="frosh-logo"/>
-        </div>
-
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#schedule" style={{ color: 'var(--purple-color)' }}>Schedule</a>
-          <a href="#events">Events</a>
-          <a href="#contact">Contact</a>
-        </div>
-
-      </nav>
+      <NavBar />
 
       <div className="main-content">
         <div className="header">
